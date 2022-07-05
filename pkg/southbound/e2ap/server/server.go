@@ -104,7 +104,7 @@ func uint24ToUint32(val []byte) uint32 {
 func (e *E2APServer) E2Setup(ctx context.Context, request *e2appducontents.E2SetupRequest) (*e2appducontents.E2SetupResponse, *e2appducontents.E2SetupFailure, error) {
 	log.Infof("Received E2 setup request: %+v", request)
 	transID, nodeIdentity, ranFuncs, _, err := pdudecoder.DecodeE2SetupRequest(request)
-	log.Infof("Ran Function : %v", ranFuncs)
+	log.Infof("Ran Function : %+v", ranFuncs)
 	if err != nil {
 		cause := &e2apies.Cause{
 			Cause: &e2apies.Cause_RicRequest{

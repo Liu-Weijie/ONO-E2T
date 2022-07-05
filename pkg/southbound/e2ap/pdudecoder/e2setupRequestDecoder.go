@@ -7,6 +7,7 @@ package pdudecoder
 import (
 	"fmt"
 	v2 "github.com/onosproject/onos-e2t/api/e2ap/v2"
+	"github.com/prometheus/common/log"
 
 	e2apies "github.com/onosproject/onos-e2t/api/e2ap/v2/e2ap-ies"
 	e2appducontents "github.com/onosproject/onos-e2t/api/e2ap/v2/e2ap-pdu-contents"
@@ -31,10 +32,12 @@ func DecodeE2SetupRequest(request *e2appducontents.E2SetupRequest) (*int32, *typ
 		}
 		if v.Id == int32(v2.ProtocolIeIDRanfunctionsAdded) {
 			ranFunctionsIe := v.GetValue()
+			log.Infof("Ran Function IE : %+v", ranFunctionsIe)
 			if ranFunctionsIe == nil {
 				return nil, nil, nil, nil, fmt.Errorf("error E2APpdu does not have id-RANfunctionsAdded")
 			}
 			for _, rfIe := range ranFunctionsIe.GetRanfunctionsAdded().GetValue() {
+				log.Infof("Ranfunction: %+v", rfIe)
 				ranFunctionsList[types.RanFunctionID(rfIe.GetValue().GetRanfunctionItem().GetRanFunctionId().GetValue())] = types.RanFunctionItem{
 					Description: rfIe.GetValue().GetRanfunctionItem().GetRanFunctionDefinition().GetValue(),
 					Revision:    types.RanFunctionRevision(rfIe.GetValue().GetRanfunctionItem().GetRanFunctionRevision().GetValue()),
