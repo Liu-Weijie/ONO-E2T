@@ -44,6 +44,7 @@ func DecodeE2SetupRequest(request *e2appducontents.E2SetupRequest) (*int32, *typ
 					OID:         types.RanFunctionOID(rfIe.GetValue().GetRanfunctionItem().GetRanFunctionOid().GetValue()),
 				}
 			}
+			log.Infof("RanfunctionList: %+v", ranFunctionsList)
 		}
 		if v.Id == int32(v2.ProtocolIeIDE2nodeComponentConfigAddition) {
 			list := v.GetValue().GetE2NodeComponentConfigAddition().GetValue()
