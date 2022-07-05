@@ -140,6 +140,8 @@ func (e *E2APServer) E2Setup(ctx context.Context, request *e2appducontents.E2Set
 		var ranFunctions []*prototypes.Any
 		var ranFunctionIDs []uint32
 		for ranFunctionID, ranFunc := range *ranFuncs {
+			log.Infof("ranfunctionID: %v", ranFunctionID)
+			log.Infof("ranFunc: %v", ranFunc)
 			oid := e2smtypes.OID(ranFunc.OID)
 			if smOid == oid {
 				serviceModels[string(smOid)] = &topoapi.ServiceModelInfo{
